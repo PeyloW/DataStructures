@@ -16,6 +16,10 @@
 		9FBC55421855C1B200F76E7F /* libDataStructures.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBC552A1855C1B200F76E7F /* libDataStructures.a */; };
 		9FBC55481855C1B200F76E7F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9FBC55461855C1B200F76E7F /* InfoPlist.strings */; };
 		9FBC554A1855C1B200F76E7F /* DataStructuresTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC55491855C1B200F76E7F /* DataStructuresTests.m */; };
+		9FBC55551855C1E500F76E7F /* FOSparseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC55541855C1E500F76E7F /* FOSparseArray.m */; };
+		9FBC55581855CC1100F76E7F /* FOHashTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC55571855CC1100F76E7F /* FOHashTable.m */; };
+		9FBC55591855E9B800F76E7F /* FOHashTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC55571855CC1100F76E7F /* FOHashTable.m */; };
+		9FBC555A1855E9BD00F76E7F /* FOSparseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC55541855C1E500F76E7F /* FOSparseArray.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		9FBC55451855C1B200F76E7F /* DataStructuresTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DataStructuresTests-Info.plist"; sourceTree = "<group>"; };
 		9FBC55471855C1B200F76E7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9FBC55491855C1B200F76E7F /* DataStructuresTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataStructuresTests.m; sourceTree = "<group>"; };
+		9FBC55531855C1E500F76E7F /* FOSparseArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FOSparseArray.h; sourceTree = "<group>"; };
+		9FBC55541855C1E500F76E7F /* FOSparseArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FOSparseArray.m; sourceTree = "<group>"; };
+		9FBC55561855CC1100F76E7F /* FOHashTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FOHashTable.h; sourceTree = "<group>"; };
+		9FBC55571855CC1100F76E7F /* FOHashTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FOHashTable.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +118,10 @@
 		9FBC552F1855C1B200F76E7F /* DataStructures */ = {
 			isa = PBXGroup;
 			children = (
+				9FBC55561855CC1100F76E7F /* FOHashTable.h */,
+				9FBC55571855CC1100F76E7F /* FOHashTable.m */,
+				9FBC55531855C1E500F76E7F /* FOSparseArray.h */,
+				9FBC55541855C1E500F76E7F /* FOSparseArray.m */,
 				9FBC55321855C1B200F76E7F /* DataStructures.h */,
 				9FBC55341855C1B200F76E7F /* DataStructures.m */,
 				9FBC55301855C1B200F76E7F /* Supporting Files */,
@@ -224,6 +236,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FBC55581855CC1100F76E7F /* FOHashTable.m in Sources */,
+				9FBC55551855C1E500F76E7F /* FOSparseArray.m in Sources */,
 				9FBC55351855C1B200F76E7F /* DataStructures.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,6 +246,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FBC55591855E9B800F76E7F /* FOHashTable.m in Sources */,
+				9FBC555A1855E9BD00F76E7F /* FOSparseArray.m in Sources */,
 				9FBC554A1855C1B200F76E7F /* DataStructuresTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
