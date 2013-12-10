@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DataStructures : NSObject
-
-@end
+#import "FOHashTable.h"
+#import "FOSortedSet.h"
+#import "FOSparseArray.h"

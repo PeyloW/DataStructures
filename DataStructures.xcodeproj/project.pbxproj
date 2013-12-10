@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9FBC552E1855C1B200F76E7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBC552D1855C1B200F76E7F /* Foundation.framework */; };
 		9FBC55331855C1B200F76E7F /* DataStructures.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9FBC55321855C1B200F76E7F /* DataStructures.h */; };
-		9FBC55351855C1B200F76E7F /* DataStructures.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC55341855C1B200F76E7F /* DataStructures.m */; };
 		9FBC553C1855C1B200F76E7F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBC553B1855C1B200F76E7F /* XCTest.framework */; };
 		9FBC553D1855C1B200F76E7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBC552D1855C1B200F76E7F /* Foundation.framework */; };
 		9FBC553F1855C1B200F76E7F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBC553E1855C1B200F76E7F /* UIKit.framework */; };
@@ -53,7 +52,6 @@
 		9FBC552D1855C1B200F76E7F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9FBC55311855C1B200F76E7F /* DataStructures-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DataStructures-Prefix.pch"; sourceTree = "<group>"; };
 		9FBC55321855C1B200F76E7F /* DataStructures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataStructures.h; sourceTree = "<group>"; };
-		9FBC55341855C1B200F76E7F /* DataStructures.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataStructures.m; sourceTree = "<group>"; };
 		9FBC553A1855C1B200F76E7F /* DataStructuresTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataStructuresTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBC553B1855C1B200F76E7F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		9FBC553E1855C1B200F76E7F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -134,7 +132,6 @@
 				9FBC55531855C1E500F76E7F /* FOSparseArray.h */,
 				9FBC55541855C1E500F76E7F /* FOSparseArray.m */,
 				9FBC55321855C1B200F76E7F /* DataStructures.h */,
-				9FBC55341855C1B200F76E7F /* DataStructures.m */,
 				9FBC55301855C1B200F76E7F /* Supporting Files */,
 			);
 			path = DataStructures;
@@ -250,7 +247,6 @@
 				9FBC55581855CC1100F76E7F /* FOHashTable.m in Sources */,
 				9FBC55551855C1E500F76E7F /* FOSparseArray.m in Sources */,
 				9FBC555D185714B700F76E7F /* FOSortedSet.m in Sources */,
-				9FBC55351855C1B200F76E7F /* DataStructures.m in Sources */,
 				9FBC55601857159000F76E7F /* FOBlockEnumerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,6 +435,7 @@
 				9FBC554F1855C1B200F76E7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9FBC55501855C1B200F76E7F /* Build configuration list for PBXNativeTarget "DataStructuresTests" */ = {
 			isa = XCConfigurationList;
@@ -447,6 +444,7 @@
 				9FBC55521855C1B200F76E7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
