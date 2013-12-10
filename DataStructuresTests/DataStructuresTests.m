@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "FOHashTable.h"
-
+#import "FOSortedSet.h"
 
 @interface DataStructuresTests : XCTestCase
 
@@ -99,5 +99,55 @@
   XCTAssertTrue([ht1 isEqualToDictionary:d], @"HT matches NSDict.");
   XCTAssertTrue([ht2 isEqualToDictionary:d], @"HT matches NSDict.");
 }
+
+
+- (void)testSortedSetAddElements;
+{
+  NSArray *array = @[@1, @2, @3, @5];
+  FOSortedSet *ss = [[FOSortedSet alloc] initWithCompareSelector:@selector(compare:)];
+  
+  [ss addObject:@5];
+  XCTAssertTrue([ss count] == 1, @"Count is 1");
+  XCTAssertTrue([ss member:@5], @"Added object is member");
+  
+  [ss addObject:@1];
+  [ss addObject:@3];
+  [ss addObject:@2];
+  
+  XCTAssertTrue([ss indexOfObject:@1] == 0, @"Index is 0");
+  XCTAssertTrue([ss indexOfObject:@2] == 1, @"Index is 1");
+  XCTAssertTrue([ss indexOfObject:@3] == 2, @"Index is 2");
+  XCTAssertTrue([ss indexOfObject:@5] == 3, @"Index is 3");
+  
+  XCTAssertTrue([[ss objectAtIndex:0] isEqualToNumber:@1], @"Is 1");
+  XCTAssertTrue([[ss objectAtIndex:1] isEqualToNumber:@2], @"Is 2");
+  XCTAssertTrue([[ss objectAtIndex:2] isEqualToNumber:@3], @"Is 3");
+  XCTAssertTrue([[ss objectAtIndex:3] isEqualToNumber:@5], @"Is 4");
+  
+  [ss addObject:@3];
+  XCTAssertTrue([ss count] == 4, @"Count is still 4");
+  
+  XCTAssertTrue([[ss allObjects] isEqualToArray:array], @"Order is correct");
+}
+
+- (void)testSortedSetInitAndRemove;
+{
+  NSArray *array = @[@1, @2, @3, @5, @7, @125];
+  NSMutableSet *set = [NSMutableSet setWithArray:array];
+  FOSortedSet *ss = [[FOSortedSet alloc] initWithSet:set];
+  
+  XCTAssertTrue([[ss allObjects] isEqualToArray:array], @"SS order mathes array");
+  
+  XCTAssertTrue([ss isEqualToSet: set], @"SS Matches NSSet");
+
+  [ss removeObject:@3];
+  [set removeObject:@3];
+  XCTAssertTrue([ss isEqualToSet: set], @"SS Matches NSSet");
+
+  [ss removeObjectAtIndex:2];
+  [set removeObject:@5];
+  XCTAssertTrue([ss isEqualToSet: set], @"SS Matches NSSet");
+}
+
 
 @end

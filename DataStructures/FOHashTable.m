@@ -8,6 +8,7 @@
 
 #import "FOHashTable.h"
 #import "FOSparseArray.h"
+#import "FOBlockEnumerator.h"
 
 #pragma mark -
 #pragma mark Private helper classes
@@ -26,13 +27,6 @@
 @interface FOLinkedKeyValuePair : FOKeyValuePair
 @property (nonatomic, strong) FOLinkedKeyValuePair *nextKeyValuePair;
 @property (nonatomic, weak) FOLinkedKeyValuePair *previousKeyValuePair;
-@end
-
-/*
- * Helper class for implementing key enumerators.
- */
-@interface FOHashTableBlockEnumerator : NSEnumerator
-- (instancetype)initWithEnumeratorBlock:(id(^)())nextEnumerator;
 @end
 
 // A marker object used with open addressing policy to mark deleted key/value pairs.
@@ -213,7 +207,7 @@ static id FOOpenAddressDeletedMarker;
   NSIndexSet *occupiedBuckets = [_buckets occupiedIndexes];
   __block NSUInteger bucketIndex = 0;
   __block FOLinkedKeyValuePair *linkedKeyValuePair;
-  return [[FOHashTableBlockEnumerator alloc] initWithEnumeratorBlock:^id{
+  return [[FOBlockEnumerator alloc] initWithEnumeratorBlock:^id{
     linkedKeyValuePair = linkedKeyValuePair.nextKeyValuePair;
     if (linkedKeyValuePair == nil) {
       bucketIndex = [occupiedBuckets indexGreaterThanOrEqualToIndex:bucketIndex];
@@ -230,7 +224,7 @@ static id FOOpenAddressDeletedMarker;
 {
   NSIndexSet *occupiedBuckets = [_buckets occupiedIndexes];
   __block NSUInteger bucketIndex = 0;
-  return [[FOHashTableBlockEnumerator alloc] initWithEnumeratorBlock:^id{
+  return [[FOBlockEnumerator alloc] initWithEnumeratorBlock:^id{
   retry:
     bucketIndex = [occupiedBuckets indexGreaterThanOrEqualToIndex:bucketIndex];
     if (bucketIndex != NSNotFound) {
@@ -301,30 +295,4 @@ static id FOOpenAddressDeletedMarker;
 @end
 
 @implementation FOLinkedKeyValuePair
-@end
-
-
-/*
- * Implementation for the helper enumeration class for implementing the key enumerators.
- * It only takes a single block that is responsible for implementing the actual enumeration.
- */
-@implementation FOHashTableBlockEnumerator {
-  __strong id(^_enumeratorBlock)();
-}
-
-- (instancetype)initWithEnumeratorBlock:(id(^)())enumeratorBlock;
-{
-  NSParameterAssert(enumeratorBlock != NULL);
-  self = [self init];
-  if (self) {
-    _enumeratorBlock = [enumeratorBlock copy];
-  }
-  return self;
-}
-
-- (id)nextObject;
-{
-  return _enumeratorBlock();
-}
-
 @end

@@ -20,6 +20,9 @@
 		9FBC55581855CC1100F76E7F /* FOHashTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC55571855CC1100F76E7F /* FOHashTable.m */; };
 		9FBC55591855E9B800F76E7F /* FOHashTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC55571855CC1100F76E7F /* FOHashTable.m */; };
 		9FBC555A1855E9BD00F76E7F /* FOSparseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC55541855C1E500F76E7F /* FOSparseArray.m */; };
+		9FBC555D185714B700F76E7F /* FOSortedSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC555C185714B700F76E7F /* FOSortedSet.m */; };
+		9FBC55601857159000F76E7F /* FOBlockEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC555F1857159000F76E7F /* FOBlockEnumerator.m */; };
+		9FBC55611857159000F76E7F /* FOBlockEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC555F1857159000F76E7F /* FOBlockEnumerator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,10 @@
 		9FBC55541855C1E500F76E7F /* FOSparseArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FOSparseArray.m; sourceTree = "<group>"; };
 		9FBC55561855CC1100F76E7F /* FOHashTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FOHashTable.h; sourceTree = "<group>"; };
 		9FBC55571855CC1100F76E7F /* FOHashTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FOHashTable.m; sourceTree = "<group>"; };
+		9FBC555B185714B700F76E7F /* FOSortedSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FOSortedSet.h; sourceTree = "<group>"; };
+		9FBC555C185714B700F76E7F /* FOSortedSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FOSortedSet.m; sourceTree = "<group>"; };
+		9FBC555E1857159000F76E7F /* FOBlockEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FOBlockEnumerator.h; sourceTree = "<group>"; };
+		9FBC555F1857159000F76E7F /* FOBlockEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FOBlockEnumerator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,8 +125,12 @@
 		9FBC552F1855C1B200F76E7F /* DataStructures */ = {
 			isa = PBXGroup;
 			children = (
+				9FBC555E1857159000F76E7F /* FOBlockEnumerator.h */,
+				9FBC555F1857159000F76E7F /* FOBlockEnumerator.m */,
 				9FBC55561855CC1100F76E7F /* FOHashTable.h */,
 				9FBC55571855CC1100F76E7F /* FOHashTable.m */,
+				9FBC555B185714B700F76E7F /* FOSortedSet.h */,
+				9FBC555C185714B700F76E7F /* FOSortedSet.m */,
 				9FBC55531855C1E500F76E7F /* FOSparseArray.h */,
 				9FBC55541855C1E500F76E7F /* FOSparseArray.m */,
 				9FBC55321855C1B200F76E7F /* DataStructures.h */,
@@ -238,7 +249,9 @@
 			files = (
 				9FBC55581855CC1100F76E7F /* FOHashTable.m in Sources */,
 				9FBC55551855C1E500F76E7F /* FOSparseArray.m in Sources */,
+				9FBC555D185714B700F76E7F /* FOSortedSet.m in Sources */,
 				9FBC55351855C1B200F76E7F /* DataStructures.m in Sources */,
+				9FBC55601857159000F76E7F /* FOBlockEnumerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FBC55611857159000F76E7F /* FOBlockEnumerator.m in Sources */,
 				9FBC55591855E9B800F76E7F /* FOHashTable.m in Sources */,
 				9FBC555A1855E9BD00F76E7F /* FOSparseArray.m in Sources */,
 				9FBC554A1855C1B200F76E7F /* DataStructuresTests.m in Sources */,
