@@ -21,6 +21,16 @@
 
 @end
 
+
+/*
+ * Implementation notes. The implementation is based on a binary search tree.
+ * The rank of a node in the search tree relative to the root node is also
+ * the index of the object.
+ *
+ * The object enumerator block is quite gnarly since it can not be recursive,
+ * and must be re-entrant. For smaller sets it is probably better to create a
+ * static array instead of traversing the tree.
+ */
 @implementation FOSortedSet {
   __strong NSComparator _comparator;
   FOTreeNode *_rootNode;
@@ -38,6 +48,7 @@
 - (instancetype)initWithSortDescriptors:(NSArray *)sortDescriptors;
 {
   NSParameterAssert([sortDescriptors count] > 0);
+  // Create a NSComparator block for the given sort descriptors and pass to designated initializer.
   return [self initWithComparator:^NSComparisonResult(id obj1, id obj2) {
     NSComparisonResult result;
     for (NSSortDescriptor *sortDescriptor in sortDescriptors) {
@@ -53,6 +64,7 @@
 - (instancetype)initWithCompareSelector:(SEL)compareSelector;
 {
   NSParameterAssert(compareSelector != NULL);
+  // Create a NSComparator block for the given comparison selector and pass to designated initializer.
   return [self initWithComparator:^NSComparisonResult(id obj1, id obj2) {
     // Use a casted direct call to message dispatch to avoid potential leaks under ARC with performSelector:withObject:
     NSComparisonResult(*castedMsgSend)(id,SEL,id) = (void *)objc_msgSend;
@@ -294,6 +306,7 @@
 
 - (NSUInteger)count;
 {
+  // Count is calculated lazily, and invalidated when any child is updated.
   if (_count == 0) {
     _count = 1;
     _count += [self.lessThanNode count];

@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 
 /*!
- * FOSortedSet manages a set of objects that is guarantied to be sorted.
+ * FOSortedSet manages a set of objects that is guarantied to be sorted in ascending order.
+ *
+ * Sorted sets created by any of the initializers from superclasses will use
+ * the compare: selector as the default comparison selector.
  */
 @interface FOSortedSet : NSMutableSet
 
