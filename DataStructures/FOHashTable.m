@@ -7,7 +7,7 @@
 //
 
 #import "FOHashTable.h"
-#import "FOSparseArray.h"
+#import "FOFixedArray.h"
 #import "FOBlockEnumerator.h"
 
 #pragma mark -
@@ -38,7 +38,7 @@ static id FOOpenAddressDeletedMarker;
 @implementation FOHashTable {
   FOHashTableCollisionResolution _resolution;
   NSUInteger _count;
-  FOSparseArray *_buckets;
+  FOFixedArray *_buckets;
 }
 
 - (instancetype)initWithCapacity:(NSUInteger)capacity collisionResolution:(FOHashTableCollisionResolution)resolution;
@@ -56,7 +56,7 @@ static id FOOpenAddressDeletedMarker;
         FOOpenAddressDeletedMarker = [NSNull null];
       });
     }
-    _buckets = [[FOSparseArray alloc] initWithCapacity:capacity];
+    _buckets = [[FOFixedArray alloc] initWithCapacity:capacity];
   }
   return self;
 }

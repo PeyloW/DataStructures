@@ -104,7 +104,9 @@
         break;
       case NSOrderedDescending:
         node.greaterThanNode = [self addObject:object toTreeNode:node.greaterThanNode];
+        break;
       default:
+        node.object = object;
         break;
     }
   }

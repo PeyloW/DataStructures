@@ -10,4 +10,5 @@
 
 #import "FOHashTable.h"
 #import "FOSortedSet.h"
+#import "FOFixedArray.h"
 #import "FOSparseArray.h"

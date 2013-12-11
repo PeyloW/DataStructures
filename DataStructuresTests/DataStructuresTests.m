@@ -7,8 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "FOHashTable.h"
-#import "FOSortedSet.h"
+#import "DataStructures.h"
 
 @interface DataStructuresTests : XCTestCase
 
@@ -147,6 +146,38 @@
   [ss removeObjectAtIndex:2];
   [set removeObject:@5];
   XCTAssertTrue([ss isEqualToSet: set], @"SS Matches NSSet");
+}
+
+- (void)testSparseArrayAddAndRemoveElements;
+{
+  FOSparseArray *sa = [[FOSparseArray alloc] initWithObjects:(id[]){@"A", @"B", @"C"}
+                                                   atIndexes:(NSUInteger[]){1, 3, 4}
+                                                       count:3];
+  XCTAssertTrue([sa count] == 3, @"Count is 3");
+  XCTAssertTrue([[sa objectAtIndex:1] isEqual:@"A"], @"Is A");
+  XCTAssertNil([sa objectAtIndex:2], @"Is nil");
+  XCTAssertTrue([[sa objectAtIndex:3] isEqual:@"B"], @"Is B");
+  XCTAssertTrue([[sa objectAtIndex:4] isEqual:@"C"], @"Is C");
+
+  [sa setObject:@"D" atIndex:0];
+  [sa setObject:@"E" atIndex:2];
+  [sa setObject:@"F" atIndex:5];
+  XCTAssertTrue([sa count] == 6, @"Count is 6");
+  [sa setObject:@"G" atIndex:1];
+  [sa setObject:@"H" atIndex:0];
+  XCTAssertTrue([sa count] == 6, @"Count is 6");
+  
+  NSArray *array = @[@"H", @"G", @"E", @"B", @"C", @"F"];
+  [sa enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    NSUInteger otherIdx = [array indexOfObject:obj];
+    XCTAssertTrue(otherIdx == idx, @"Indexes matches");
+    XCTAssertTrue([obj isEqual:array[idx]], @"Objects matches");
+  }];
+  
+  [sa removeObjectAtIndex:0];
+  [sa removeObjectAtIndex:5];
+  [sa removeObjectAtIndex:3];
+  XCTAssertTrue([sa count] == 3, @"Count is 3");
 }
 
 

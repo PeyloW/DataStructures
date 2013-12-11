@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger, FOHashTableCollisionResolution) {
 
 /*!
  * Returns a hash table, initialized with a capacity and a collision resolution policy.
+ * This is the designated initializer for FOHashTable.
  *
  * Linked list collision resulution uses a linked list of key/value pairs for each hash bucket,
  * enabling a potentially infinite number of elements.

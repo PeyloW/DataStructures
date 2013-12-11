@@ -2,81 +2,124 @@
 //  FOSparseArray.m
 //  DataStructures
 //
-//  Created by Fredrik Olsson on 09/12/13.
+//  Created by Fredrik Olsson on 11/12/13.
 //  Copyright (c) 2013 Fredrik Olsson. All rights reserved.
 //
 
 #import "FOSparseArray.h"
+#import "FOSortedSet.h"
+#import "FOBlockEnumerator.h"
+
+@interface FOIndexedObject : NSObject
+@property (nonatomic, assign) NSUInteger index;
+@property (nonatomic, strong) id object;
++ (instancetype)indexedObjectWithObject:(id)object index:(NSUInteger)index;
+@end
+
 
 /*
- * The implementation of FOSparseArray uses a fixed array of objects.
- * This gives best access times for both adding and removing objects,
- * at the cost of a memory usage overhead.
- * This overhead is unimportant when the fill-rate is high, and/or the
- * maximum capacity is low.
- * Could use a linked list implementation if the maximum capacity is
- * huge and the fill-rate is low.
+ * The sparse array is implemented with a backing sorted set, where each object in the sorted set
+ * ins an object/index pair that is sorted, and uniqued, by the index.
  */
 @implementation FOSparseArray {
-  NSMutableIndexSet *_occupieIndexes;
-  NSUInteger _capacity;
-  __strong id *_objects;
+  FOSortedSet *_sortedSet;
 }
 
 - (instancetype)init;
 {
-  return [self initWithCapacity:0];
+  return [self initWithObjects:NULL atIndexes:NULL count:0];
 }
 
-- (instancetype)initWithCapacity:(NSUInteger)capacity;
+- (instancetype)initWithObjects:(const id [])objects atIndexes:(const NSUInteger [])indexes count:(NSUInteger)count;
 {
   self = [super init];
   if (self) {
-    _occupieIndexes = [[NSMutableIndexSet alloc] init];
-    _capacity = capacity;
-    _objects = (__strong id*)calloc(capacity, sizeof(id));
+    _sortedSet = [[FOSortedSet alloc] initWithComparator:^NSComparisonResult(FOIndexedObject *obj1, FOIndexedObject *obj2) {
+      if (obj1.index < obj2.index) {
+        return NSOrderedAscending;
+      } else if (obj1.index > obj2.index) {
+        return NSOrderedDescending;
+      } else {
+        return NSOrderedSame;
+      }
+    }];
+    for (int index = 0; index < count; ++index) {
+      [self setObject:objects[index] atIndex:indexes[index]];
+    }
   }
   return self;
 }
 
-- (void)dealloc;
-{
-  [_occupieIndexes enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop) {
-    _objects[index] = nil;
-  }];
-  free(_objects);
-}
-
 - (NSUInteger)count;
 {
-  return [_occupieIndexes count];
-}
-
-- (NSUInteger)capacity;
-{
-  return _capacity;
+  return [_sortedSet count];
 }
 
 - (NSIndexSet *)occupiedIndexes;
 {
-  return [_occupieIndexes copy];
+  NSMutableIndexSet *indexSet = [[NSMutableIndexSet alloc] init];
+  for (FOIndexedObject *indexedObject in _sortedSet) {
+    [indexSet addIndex:indexedObject.index];
+  }
+  return [indexSet copy];
 }
 
 - (id)objectAtIndex:(NSUInteger)index;
 {
-  NSParameterAssert(index < _capacity);
-  return _objects[index];
+  FOIndexedObject *indexedObject = [FOIndexedObject indexedObjectWithObject:[NSNull null] index:index];
+  // Trust the contract of member: to return the instance in the set, not the object to test if they are equal.
+  indexedObject = [_sortedSet member:indexedObject];
+  return indexedObject.object;
 }
 
 - (void)setObject:(id)object atIndex:(NSUInteger)index;
 {
-  NSParameterAssert(index < _capacity);
-  if (object) {
-    [_occupieIndexes addIndex:index];
-  } else {
-    [_occupieIndexes removeIndex:index];
+  FOIndexedObject *indexedObject = [FOIndexedObject indexedObjectWithObject:object index:index];
+  [_sortedSet addObject:indexedObject];
+}
+
+- (void)removeObjectAtIndex:(NSUInteger)index;
+{
+  FOIndexedObject *indexedObject = [FOIndexedObject indexedObjectWithObject:[NSNull null] index:index];
+  [_sortedSet removeObject:indexedObject];
+}
+
+- (NSEnumerator *)objectEnumerator;
+{
+  NSEnumerator *sortedSetEnumerator = [_sortedSet objectEnumerator];
+  return [[FOBlockEnumerator alloc] initWithEnumeratorBlock:^id{
+    FOIndexedObject *indexedObject = [sortedSetEnumerator nextObject];
+    return indexedObject.object;
+  }];
+}
+
+- (void)enumerateObjectsUsingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block;
+{
+  BOOL stop = NO;
+  for (FOIndexedObject *indexedObject in _sortedSet) {
+    block(indexedObject.object, indexedObject.index, &stop);
+    if (stop) {
+      break;
+    }
   }
-  _objects[index] = object;
+}
+
+@end
+
+
+@implementation FOIndexedObject
++ (instancetype)indexedObjectWithObject:(id)object index:(NSUInteger)index;
+{
+  NSParameterAssert(object != nil);
+  FOIndexedObject *indexedObject = [[self alloc] init];
+  indexedObject.index = index;
+  indexedObject.object = object;
+  return indexedObject;
+}
+
+- (NSString *)description;
+{
+  return [NSString stringWithFormat:@"%@ %u : %@", [super description], self.index, self.object];
 }
 
 @end
