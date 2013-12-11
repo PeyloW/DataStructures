@@ -127,6 +127,14 @@
   XCTAssertTrue([ss count] == 4, @"Count is still 4");
   
   XCTAssertTrue([[ss allObjects] isEqualToArray:array], @"Order is correct");
+
+  NSEnumerator *enuerator = [ss objectEnumerator];
+  NSUInteger index = 0;
+  id object;
+  while (object = [enuerator nextObject]) {
+    XCTAssertTrue([object isEqual:array[index]], @"Object matches");
+    ++index;
+  }
 }
 
 - (void)testSortedSetInitAndRemove;

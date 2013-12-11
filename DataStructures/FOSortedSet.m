@@ -211,6 +211,15 @@
   return node;
 }
 
+- (void)addAllObjectsToMutableArray:(NSMutableArray *) array inTreeNode:(FOTreeNode *)node;
+{
+  if (node) {
+    [self addAllObjectsToMutableArray:array inTreeNode:node.lessThanNode];
+    [array addObject:node.object];
+    [self addAllObjectsToMutableArray:array inTreeNode:node.greaterThanNode];
+  }
+}
+
 - (NSUInteger)indexForObject:(id)object inTreeNode:(FOTreeNode *)node;
 {
   if (node) {
@@ -297,6 +306,14 @@
   }];
 }
 
+- (NSArray *)allObjects;
+{
+  // A more performant method that the default implementation that uses the enumerator.
+  NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:[self count]];
+  [self addAllObjectsToMutableArray:array inTreeNode:_rootNode];
+  return [array copy];
+}
+
 #pragma mark -
 #pragma mark Primitive methods for subclassing NSMutableSet
 
@@ -304,6 +321,7 @@
 {
   NSParameterAssert(object != nil);
   _rootNode = [self addObject:object toTreeNode:_rootNode];
+  _rootNode.parentNode = nil;
 }
 
 - (void)removeObject:(id)object;
@@ -311,6 +329,7 @@
   NSParameterAssert(object);
   BOOL didRemove = NO;
   _rootNode = [self removeObject:object fromTreeNode:_rootNode didRemove:&didRemove];
+  _rootNode.parentNode = nil;
 }
 
 #pragma mark -
