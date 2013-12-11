@@ -143,8 +143,11 @@
   [set removeObject:@3];
   XCTAssertTrue([ss isEqualToSet: set], @"SS Matches NSSet");
 
-  [ss removeObjectAtIndex:2];
-  [set removeObject:@5];
+  [ss removeObjectAtIndex:4];
+  [ss removeObjectAtIndex:3];
+  [set removeObject:@7];
+  [set removeObject:@125];
+  
   XCTAssertTrue([ss isEqualToSet: set], @"SS Matches NSSet");
 }
 

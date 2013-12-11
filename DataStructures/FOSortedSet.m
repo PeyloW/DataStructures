@@ -17,13 +17,16 @@
 @property (nonatomic, strong) FOTreeNode *greaterThanNode;
 
 - (NSUInteger)count;
-- (void)invalidateCount;
+- (NSUInteger)height;
+
+- (void)invalidateCountAndHeight;
 
 @end
 
 
 /*
- * Implementation notes. The implementation is based on a binary search tree.
+ * Implementation notes. The implementation is based on a self-balancing 
+ * binary search tree, an AVL tree.
  * The rank of a node in the search tree relative to the root node is also
  * the index of the object.
  *
@@ -91,6 +94,49 @@
   return nil;
 }
 
+- (FOTreeNode *)rotateTreeNode:(FOTreeNode *)node towardGreaterThan:(BOOL)greaterThan;
+{
+  FOTreeNode *headNode, *tempNode;
+  if (greaterThan) {
+    headNode = node.lessThanNode;
+    tempNode = headNode.greaterThanNode;
+    headNode.greaterThanNode = node;
+    node.lessThanNode = tempNode;
+  } else {
+    headNode = node.greaterThanNode;
+    tempNode = headNode.lessThanNode;
+    headNode.lessThanNode = node;
+    node.greaterThanNode = tempNode;
+  }
+  return headNode;
+}
+
+- (FOTreeNode *)balancedTreeNode:(FOTreeNode *)node;
+{
+  NSInteger balance = (NSUInteger)[node.lessThanNode height] - [node.greaterThanNode height];
+  //
+  if (balance > 1) {
+    if ([node.lessThanNode.lessThanNode height] >= [node.lessThanNode.greaterThanNode height]) {
+      // less-less
+      node = [self rotateTreeNode:node towardGreaterThan:YES];
+    } else {
+      // less-greater
+      node.lessThanNode = [self rotateTreeNode:node.lessThanNode towardGreaterThan:NO];
+      node = [self rotateTreeNode:node towardGreaterThan:YES];
+    }
+  } else if (balance < -1) {
+    if ([node.greaterThanNode.greaterThanNode height] >= [node.greaterThanNode.lessThanNode height]) {
+      // greater-greater
+      node = [self rotateTreeNode:node towardGreaterThan:NO];
+    } else {
+      // greater-less
+      node.greaterThanNode = [self rotateTreeNode:node.greaterThanNode towardGreaterThan:YES];
+      node = [self rotateTreeNode:node towardGreaterThan:NO];
+    }
+  }
+  return node;
+}
+
 - (FOTreeNode *)addObject:(id)object toTreeNode:(FOTreeNode *)node;
 {
   if (node == nil) {
@@ -108,6 +154,9 @@
       default:
         node.object = object;
         break;
+    }
+    if (result != NSOrderedSame) {
+      node = [self balancedTreeNode:node];
     }
   }
   return node;
@@ -131,16 +180,16 @@
   return node;
 }
 
-- (FOTreeNode *)removeObject:(id)object fromTreeNode:(FOTreeNode *)node;
+- (FOTreeNode *)removeObject:(id)object fromTreeNode:(FOTreeNode *)node didRemove:(BOOL *)didRemoveOut;
 {
   if (node != nil) {
     NSComparisonResult result = _comparator(object, node.object);
     switch (result) {
       case NSOrderedAscending:
-        node.lessThanNode = [self removeObject:object fromTreeNode:node.lessThanNode];
+        node.lessThanNode = [self removeObject:object fromTreeNode:node.lessThanNode didRemove:didRemoveOut];
         break;
       case NSOrderedDescending:
-        node.greaterThanNode = [self removeObject:object fromTreeNode:node.greaterThanNode];
+        node.greaterThanNode = [self removeObject:object fromTreeNode:node.greaterThanNode didRemove:didRemoveOut];
         break;
       default:
         if (node.greaterThanNode == nil) {
@@ -153,6 +202,10 @@
           node.greaterThanNode = [self nodeByDeletingMinNodeInTreeNode:tempNode.greaterThanNode];
           node.lessThanNode = tempNode.lessThanNode;
         }
+        *didRemoveOut = YES;
+    }
+    if (node && *didRemoveOut) {
+      node = [ self balancedTreeNode:node];
     }
   }
   return node;
@@ -256,7 +309,8 @@
 - (void)removeObject:(id)object;
 {
   NSParameterAssert(object);
-  _rootNode = [self removeObject:object fromTreeNode:_rootNode];
+  BOOL didRemove = NO;
+  _rootNode = [self removeObject:object fromTreeNode:_rootNode didRemove:&didRemove];
 }
 
 #pragma mark -
@@ -290,18 +344,19 @@
 
 @implementation FOTreeNode {
   NSUInteger _count;
+  NSUInteger _height;
 }
 
 - (void)setLessThanNode:(FOTreeNode *)node;
 {
-  [self invalidateCount];
+  [self invalidateCountAndHeight];
   _lessThanNode = node;
   _lessThanNode.parentNode = self;
 }
 
 - (void)setGreaterThanNode:(FOTreeNode *)node;
 {
-  [self invalidateCount];
+  [self invalidateCountAndHeight];
   _greaterThanNode = node;
   _greaterThanNode.parentNode = self;
 }
@@ -317,11 +372,20 @@
   return _count;
 }
 
-- (void)invalidateCount;
+- (NSUInteger)height;
 {
-  if (_count != 0) {
-    _count = 0;
-    [self.parentNode invalidateCount];
+  if (_height == 0) {
+    _height = 1;
+    _height += MAX([self.lessThanNode height], [self.greaterThanNode height]);
+  }
+  return _height;
+}
+
+- (void)invalidateCountAndHeight;
+{
+  if (_count != 0 || _height != 0) {
+    _count = _height = 0;
+    [self.parentNode invalidateCountAndHeight];
   }
 }
 
