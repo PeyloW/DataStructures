@@ -204,7 +204,7 @@ static id FOOpenAddressDeletedMarker;
 
 - (NSEnumerator *)keyEnumeratorWithLinkedList;
 {
-  NSIndexSet *occupiedBuckets = [_buckets occupiedIndexes];
+  FOIndexSet *occupiedBuckets = [_buckets occupiedIndexes];
   __block NSUInteger bucketIndex = 0;
   __block FOLinkedKeyValuePair *linkedKeyValuePair;
   return [[FOBlockEnumerator alloc] initWithEnumeratorBlock:^id{
@@ -222,7 +222,7 @@ static id FOOpenAddressDeletedMarker;
 
 - (NSEnumerator *)keyEnumeratorWithOpenAddressing;
 {
-  NSIndexSet *occupiedBuckets = [_buckets occupiedIndexes];
+  FOIndexSet *occupiedBuckets = [_buckets occupiedIndexes];
   __block NSUInteger bucketIndex = 0;
   return [[FOBlockEnumerator alloc] initWithEnumeratorBlock:^id{
   retry:

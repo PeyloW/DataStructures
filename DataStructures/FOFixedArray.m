@@ -18,7 +18,7 @@
  * huge and the fill-rate is low.
  */
 @implementation FOFixedArray {
-  NSMutableIndexSet *_occupieIndexes;
+  FOMutableIndexSet *_occupieIndexes;
   NSUInteger _capacity;
   __strong id *_objects;
 }
@@ -32,7 +32,7 @@
 {
   self = [super init];
   if (self) {
-    _occupieIndexes = [[NSMutableIndexSet alloc] init];
+    _occupieIndexes = [[FOMutableIndexSet alloc] init];
     _capacity = capacity;
     _objects = (__strong id*)calloc(capacity, sizeof(id));
   }
@@ -57,7 +57,7 @@
   return _capacity;
 }
 
-- (NSIndexSet *)occupiedIndexes;
+- (FOIndexSet *)occupiedIndexes;
 {
   return [_occupieIndexes copy];
 }

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F7A2012185B0A41002ACD8F /* PrimitiveArrayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7A2010185A1370002ACD8F /* PrimitiveArrayTests.m */; };
+		9F7A2013185B1322002ACD8F /* PrimitiveArrayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7A2010185A1370002ACD8F /* PrimitiveArrayTests.m */; };
+		9F7A2014185B1363002ACD8F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBC553B1855C1B200F76E7F /* XCTest.framework */; };
+		9F873777185F46070016EE28 /* FOIndexSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F873776185F46070016EE28 /* FOIndexSet.m */; };
 		9FA7E3A91858754000B7693B /* FOSparseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA7E3A81858754000B7693B /* FOSparseArray.m */; };
 		9FBC552E1855C1B200F76E7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBC552D1855C1B200F76E7F /* Foundation.framework */; };
 		9FBC55331855C1B200F76E7F /* DataStructures.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9FBC55321855C1B200F76E7F /* DataStructures.h */; };
@@ -49,6 +53,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9F7A200F185A1370002ACD8F /* FOPrimitiveArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FOPrimitiveArray.h; sourceTree = "<group>"; };
+		9F7A2010185A1370002ACD8F /* PrimitiveArrayTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrimitiveArrayTests.m; path = ../DataStructures/PrimitiveArrayTests.m; sourceTree = "<group>"; };
+		9F873775185F46070016EE28 /* FOIndexSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FOIndexSet.h; sourceTree = "<group>"; };
+		9F873776185F46070016EE28 /* FOIndexSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FOIndexSet.m; sourceTree = "<group>"; };
 		9FA7E3A71858754000B7693B /* FOSparseArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FOSparseArray.h; sourceTree = "<group>"; };
 		9FA7E3A81858754000B7693B /* FOSparseArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FOSparseArray.m; sourceTree = "<group>"; };
 		9FA7E3AA18589F8300B7693B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
@@ -77,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F7A2014185B1363002ACD8F /* XCTest.framework in Frameworks */,
 				9FBC552E1855C1B200F76E7F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,10 +143,13 @@
 				9FBC55541855C1E500F76E7F /* FOFixedArray.m */,
 				9FBC55561855CC1100F76E7F /* FOHashTable.h */,
 				9FBC55571855CC1100F76E7F /* FOHashTable.m */,
+				9F873775185F46070016EE28 /* FOIndexSet.h */,
+				9F873776185F46070016EE28 /* FOIndexSet.m */,
 				9FBC555B185714B700F76E7F /* FOSortedSet.h */,
 				9FBC555C185714B700F76E7F /* FOSortedSet.m */,
 				9FA7E3A71858754000B7693B /* FOSparseArray.h */,
 				9FA7E3A81858754000B7693B /* FOSparseArray.m */,
+				9F7A200F185A1370002ACD8F /* FOPrimitiveArray.h */,
 				9FBC55321855C1B200F76E7F /* DataStructures.h */,
 				9FBC55301855C1B200F76E7F /* Supporting Files */,
 			);
@@ -156,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				9FBC55491855C1B200F76E7F /* DataStructuresTests.m */,
+				9F7A2010185A1370002ACD8F /* PrimitiveArrayTests.m */,
 				9FBC55441855C1B200F76E7F /* Supporting Files */,
 			);
 			path = DataStructuresTests;
@@ -254,6 +267,8 @@
 				9FA7E3A91858754000B7693B /* FOSparseArray.m in Sources */,
 				9FBC55581855CC1100F76E7F /* FOHashTable.m in Sources */,
 				9FBC55551855C1E500F76E7F /* FOFixedArray.m in Sources */,
+				9F873777185F46070016EE28 /* FOIndexSet.m in Sources */,
+				9F7A2013185B1322002ACD8F /* PrimitiveArrayTests.m in Sources */,
 				9FBC555D185714B700F76E7F /* FOSortedSet.m in Sources */,
 				9FBC55601857159000F76E7F /* FOBlockEnumerator.m in Sources */,
 			);
@@ -265,6 +280,7 @@
 			files = (
 				9FBC55611857159000F76E7F /* FOBlockEnumerator.m in Sources */,
 				9FBC55591855E9B800F76E7F /* FOHashTable.m in Sources */,
+				9F7A2012185B0A41002ACD8F /* PrimitiveArrayTests.m in Sources */,
 				9FBC555A1855E9BD00F76E7F /* FOFixedArray.m in Sources */,
 				9FBC554A1855C1B200F76E7F /* DataStructuresTests.m in Sources */,
 			);
@@ -366,6 +382,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/DataStructures.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DataStructures/DataStructures-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
@@ -378,6 +398,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/DataStructures.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DataStructures/DataStructures-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";

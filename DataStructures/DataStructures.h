@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FOHashTable.h"
-#import "FOSortedSet.h"
 #import "FOFixedArray.h"
+#import "FOHashTable.h"
+#import "FOIndexSet.h"
+#import "FOSortedSet.h"
 #import "FOSparseArray.h"

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FOIndexSet.h"
 
 /*!
  * FOFixedArray manages an array of objects, with a fixed maximum capacity, where elements may be nil.
@@ -44,7 +45,7 @@
  *
  * @result An index set with the indexes currently occupied by objects in the fixed array.
  */
-- (NSIndexSet *)occupiedIndexes;
+- (FOIndexSet *)occupiedIndexes;
 
 /*!
  * Returns the object located at the specified index, or nil of no object occupies the specified index.
